@@ -12,7 +12,11 @@ connectgdb: main.elf
 	gdb-multiarch main.elf -ex "target remote localhost:1234"
 
 clear:
-	rm *.out *.bin *.elf
+	rm -rf *.out *.bin *.elf c-asm.s
 
 assembly:
-	riscv64-unknown-elf-gcc -O0 -ggdb -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm.ld c-asm.s -S
+	riscv64-unknown-elf-gcc -O1 -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm.ld c-asm.c -S
+
+piyush:
+	riscv64-unknown-elf-gcc -O0 -ggdb -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm.ld m.s c-asm.c -o main.elf
+	riscv64-unknown-elf-objcopy -O binary main.elf main.bin

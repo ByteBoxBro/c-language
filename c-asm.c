@@ -1,7 +1,11 @@
 int piyush(){
-    char c1 = 'A';
+
+    volatile int i = 10;
+
+    i = i + 1;
+    i = i + 10;
+
     
 
-
-    return 0;
+    return i;
 }
