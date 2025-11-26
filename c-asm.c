@@ -1,11 +1,16 @@
-int piyush(){
+void piyush(){
 
-    volatile int i = 10;
+    int i = 10;
+    int j = 2;
 
-    i = i + 1;
-    i = i + 10;
+    if (i == 10){
+        goto end;
+    }
 
-    
+    i = i + 19;
 
-    return i;
+    end: 
+        j = j + 10;
+
+    return;
 }

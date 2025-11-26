@@ -8,17 +8,29 @@
 	.globl	piyush
 	.type	piyush, @function
 piyush:
-	addi	sp,sp,-16
+	addi	sp,sp,-32
+	sw	s0,28(sp)
+	addi	s0,sp,32
 	li	a5,10
-	sw	a5,12(sp)
-	lw	a5,12(sp)
-	addi	a5,a5,1
-	sw	a5,12(sp)
-	lw	a5,12(sp)
+	sw	a5,-20(s0)
+	li	a5,2
+	sw	a5,-24(s0)
+	lw	a4,-20(s0)
+	li	a5,10
+	beq	a4,a5,.L5
+	lw	a5,-20(s0)
+	addi	a5,a5,19
+	sw	a5,-20(s0)
+	j	.L3
+.L5:
+	nop
+.L3:
+	lw	a5,-24(s0)
 	addi	a5,a5,10
-	sw	a5,12(sp)
-	lw	a0,12(sp)
-	addi	sp,sp,16
+	sw	a5,-24(s0)
+	nop
+	lw	s0,28(sp)
+	addi	sp,sp,32
 	jr	ra
 	.size	piyush, .-piyush
 	.ident	"GCC: (13.2.0-11ubuntu1+12) 13.2.0"

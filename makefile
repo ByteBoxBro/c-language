@@ -6,7 +6,7 @@ printbinary: main.bin
 	xxd -e -c 4 -g 4 main.bin
 
 startqemu: main.elf
-	qemu-system-riscv32 -S -M virt -nongraphic -bios none -kernel main.elf -gdb tcp::1234
+	qemu-system-riscv32 -S -M virt -nographic -bios none -kernel main.elf -gdb tcp::1234
 
 connectgdb: main.elf
 	gdb-multiarch main.elf -ex "target remote localhost:1234"
@@ -15,7 +15,7 @@ clear:
 	rm -rf *.out *.bin *.elf c-asm.s
 
 assembly:
-	riscv64-unknown-elf-gcc -O1 -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm.ld c-asm.c -S
+	riscv64-unknown-elf-gcc -O0 -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm.ld c-asm.c -S
 
 piyush:
 	riscv64-unknown-elf-gcc -O0 -ggdb -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tm.ld m.s c-asm.c -o main.elf
